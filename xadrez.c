@@ -2,57 +2,53 @@
 
 // Desafio de Xadrez - MateCheck
 // Nível Novato - Movimentação das Peças
-   
-int main() {
-    int bispo = 0, rainha = 0, cavalo = 1;
+void recursivotorre(int torre) {
+    if (torre < 5) {
+        printf("Direita\n");
+        recursivotorre(torre - 1);
+    } 
+}
 
-
-    printf("Movimentos das peças de xadrez \n");
-
-    printf("\n----------Movimento da Torre---------- \n\n");
-    for( int torre = 0; torre < 5; torre++) //Vai execultar 5 vezes o movimento da torre
-    {
-       printf("Direita \n");
+void recursivobispo(int linhas, int colunas,int casas){
+    if (casas == 0){
+        printf("\nBispo moveu 5 casas em diagonal\n\n");
+        return;
     }
-    printf("Torre andou 5 casas para direita\n");
-
-    printf("\n----------Movimento do Bispo----------\n\n");
-
-    while (bispo < 5) { //Vai execultar 5 vezes o movimento do bispo
-        printf("Cima, Direita \n");
-        bispo++;
-    }
-    printf("Bispo andou 5 casas em diagonal\n");
-    
-    printf("\n----------Movimento da Rainha----------\n\n");
-
-    do{ //Vai execultar 8 vezes o movimento da rainha
-       printf("Esquerda \n");
-       rainha++;
-    } while (rainha < 8);
-    printf("Rainha andou 8 casas para esquerda\n");
-
-
-
-// Nível Aventureiro - Movimentação do Cavalo
-    printf("\n----------Movimento do Cavalo----------\n\n");
-
-    while (cavalo--)
-    {
-        for (int c = 0; c < 2; c++) {
-          printf("Baixo, ");    
-
+    for (int l = 0; l < linhas; l++){
+        for(int c = 0; c < colunas; c++){ 
+            if(l == c){ 
+                printf("Cima,Direita\t");
+            }
         }
-        printf("Esquerda\n");
     }
-    printf("Cavalo moveu em L\n");
-        
-// Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
+    mov_bispo(0,0,casas - 1);
+}
+void recessivorainha(int casas){
+    if (casas == 0){
+        printf("\nRainha movimentou 8 casas para esquerda\n\n");
+        return;
+    }
+    printf("Esquerda\t");
+    recessivorainha(casas - 1);
+}
+void recessivocavalo(int movimentos) {
+    for (int i = 0; i < movimentos; i++) {
+        for (int j = 0; j < movimentos; j++) {
+            if (i == j) continue;
+            if (i == 2 && j == 1) {
+                printf("Cima\tCima\tDireita");
+                break;
+            }
+        }
+    }
+    printf("\nCavalo moveu 2 casas pra cima e 1 pra direita");
+}
 
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
 
+int main(){
+    recursivotorre(5); 
+    recursivobispo(5,5,1); 
+    recessivorainha(8);
+    recessivocavalo(3);
     return 0;
 }
